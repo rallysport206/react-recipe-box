@@ -24,7 +24,7 @@ class Recipe extends React.Component {
         let recipe = this.state.recipes;
         recipes.push(recipe);
         this.setState({recipes: recipes});
-        this.showAddModal():
+        this.showAddModal();
     }
     render() {
         const recipes = this.state.recipes;
