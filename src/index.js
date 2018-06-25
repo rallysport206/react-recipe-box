@@ -11,8 +11,20 @@ class Recipe extends React.Component {
                 {name: "Banana Smoothie", ingredients:["2 bananas", "1/2 cup vanilla yogurt", "1/2 cup skim milk", "2 teaspoons honey", "pinch of cinnamon"]},
                 {name: "Spaghetti", ingredients: ["Noodles", "Tomato Sauce", "Meatballs"]},
                 {name: "Split Pea Soup", ingredients: ["1 pound split peas", "1 onion", "6 carrot", "4 ounce of ham"]}
-            ]
+            ],
+            showAdd: false
         };
+        this.showAddModal = this.showAddModal.bind(this);
+        this.addRecipe = this.addRecipe.bind(this);
+    }
+    showAddModal() { //show the new recipe 
+        this.setState ({showAdd: !this.state.showAdd});
+    }
+    addRecipe(recipe){ // create a new recipe
+        let recipe = this.state.recipes;
+        recipes.push(recipe);
+        this.setState({recipes: recipes});
+        this.showAddModal():
     }
     render() {
         const recipes = this.state.recipes;
@@ -42,6 +54,7 @@ class Recipe extends React.Component {
                     ))}
                 </PanelGroup>
                 <Button bsStyle="primary">Add Recipe</Button>
+                <AddRecipe onShow={this.state.showAdd} onAdd={this.addRecipe} onAddModal={this.showAddModel} />
             </div>
         );
     }
