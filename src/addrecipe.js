@@ -4,6 +4,7 @@ import {Modal,ControlLabel,FormGroup,FormControl,Button} from 'react-bootstrap';
 // class for displaying the modal for adding a new recipe and export it.
 export class AddRecipe extends React.Component {
     constructor(props){
+        super(props);
         this.state = {name: "", ingredients: ""};
         this.handleRecipeNameChange = this.handleRecipeNameChange.bind(this);
         this.handleRecipeIngredientsChange = this.handleRecipeIngredientsChange.bind(this);
@@ -14,14 +15,14 @@ export class AddRecipe extends React.Component {
         this.setState({name:e.target.value});
     }
     handleRecipeIngredientsChange(e) {
-        this.setState({ingredients:e.target.value});
+        this.setState({ingredients: e.target.value});
     }
     handleSubmit(e) {
         e.preventDefault();
         const onAdd = this.props.onAdd;
         const regExp = /\s*, \s*/;
         var newName = this.state.name;
-        var nawIngredients = this.state.ingredients.split(regExp);
+        var newIngredients = this.state.ingredients.split(regExp);
         var newRecipe = {name: newName, ingredients: newIngredients};
         onAdd(newRecipe);
         this.setState({name:"", ingredients: ""});
@@ -40,7 +41,7 @@ export class AddRecipe extends React.Component {
     regex2.test(this.state.ingredients) &&
     regex3.test(this.state.ingredients);
         return(
-            <Modal show{onShow} onHide={this.handleCancel}>
+            <Modal show={onShow} onHide={this.handleCancel}>
                 <Modal.Header closeButton>
                     <Modal.Title>New Recipe</Modal.Title>
                 </Modal.Header>
