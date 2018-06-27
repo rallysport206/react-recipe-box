@@ -43,7 +43,7 @@ export class AddRecipe extends React.Component {
         return(
             <Modal show={onShow} onHide={this.handleCancel}>
                 <Modal.Header closeButton>
-                    <Modal.Title>New Recipe</Modal.Title>
+                    <Modal.Title>Edit Recipe</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <FormGroup controlId="formControlsName">
