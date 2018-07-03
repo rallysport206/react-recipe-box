@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {PanelGroup,Panel,Button,ButtonToolbar,ListGroup,ListGroupItem} from 'react-bootstrap';
 import {AddRecipe} from './addrecipe';
+import {EditRecipe} from './editrecipe';
 import './index.css';
 //create the main class for displaying the recipes
 class Recipe extends React.Component {
@@ -13,19 +14,32 @@ class Recipe extends React.Component {
         {name: "Spaghetti", ingredients: ["Noodles", "Tomato Sauce", "Meatballs"]},
         {name: "Split Pea Soup", ingredients: ["1 pound split peas", "1 onion", "6 carrots", "4 ounces of ham"]}
       ],
-      showAdd: false
+      showAdd: false,
+      showEdit: false,
+      currentlyEditing: 0
     };
     this.showAddModal = this.showAddModal.bind(this);
+    this.showEditModal = this.showEditModal.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
+    this.EditRecipe = this.EditRecipe.bind(this);
   }
   showAddModal() {//show the new recipe modal
     this.setState({showAdd: !this.state.showAdd});
+  }
+  showEditModal(index) { //show edit recipe modal
+    this.setState({showEdit: !this.state.showEdit, currentlyEditing: index}):
   }
   addRecipe(recipe) {//create a new recipe
     let recipes = this.state.recipes;
     recipes.push(recipe);
     this.setState({recipes: recipes});
     this.showAddModal();
+  }
+  EditRecipe(newName, newIngredients, currentlyEditing) {//this will edit an existing recipe
+    let recipes = this.state.recipes;
+    recipes[currentlyEditing] = {name: newName, ingredients: newIngredients};
+    this.setState({recipes: recipes});
+    this.showEditModal(currentlyEditing);
   }
   render() {
     const recipes = this.state.recipes;
@@ -45,10 +59,13 @@ class Recipe extends React.Component {
                   ))}
                 </ListGroup>
                 <ButtonToolbar>
-                  <Button bsStyle="warning">Edit</Button>
+                  <Button bsStyle="warning" onClick={() => {this.showEditModal(index)}}>Edit</Button>
                   <Button bsStyle="danger">Delete</Button>
                 </ButtonToolbar>
               </Panel.Body>
+              <EditRecipe onShow={this.state.showEdit} onEdit={this.editRecipe} onEditModal={() => {this.showEditModal(this.state.currentlyEditing)}}
+              currentlyEditing={this.state.currentlyEditing}
+              recipe={recipes[this.state.currentlyEditing]} />
             </Panel>
           ))}
         </PanelGroup>
