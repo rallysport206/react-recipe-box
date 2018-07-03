@@ -27,7 +27,7 @@ class Recipe extends React.Component {
     this.setState({showAdd: !this.state.showAdd});
   }
   showEditModal(index) { //show edit recipe modal
-    this.setState({showEdit: !this.state.showEdit, currentlyEditing: index}):
+    this.setState({showEdit: !this.state.showEdit, currentlyEditing: index});
   }
   addRecipe(recipe) {//create a new recipe
     let recipes = this.state.recipes;
