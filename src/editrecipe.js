@@ -6,7 +6,7 @@ export class EditRecipe extends React.Component {
         super(props);
         this.state = {name: "", ingredients: ""};
         this.handleRecipeNameChange = this.handleRecipeNameChange.bind(this);
-        this.handleIngredientsChange = this.handleIngredientsChange.bind(this);
+        this.handleIngredientsChange = this.handleRecipeIngredientsChange.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
     }

@@ -21,12 +21,12 @@ class Recipe extends React.Component {
     this.showAddModal = this.showAddModal.bind(this);
     this.showEditModal = this.showEditModal.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
-    this.EditRecipe = this.EditRecipe.bind(this);
+    this.editRecipe = this.editRecipe.bind(this);
   }
   showAddModal() {//show the new recipe modal
     this.setState({showAdd: !this.state.showAdd});
   }
-  showEditModal(index) { //show edit recipe modal
+  showEditModal(index) {//show the edit recipe modal
     this.setState({showEdit: !this.state.showEdit, currentlyEditing: index});
   }
   addRecipe(recipe) {//create a new recipe
@@ -35,7 +35,7 @@ class Recipe extends React.Component {
     this.setState({recipes: recipes});
     this.showAddModal();
   }
-  EditRecipe(newName, newIngredients, currentlyEditing) {//this will edit an existing recipe
+  editRecipe(newName, newIngredients, currentlyEditing) {//edit an existing recipe
     let recipes = this.state.recipes;
     recipes[currentlyEditing] = {name: newName, ingredients: newIngredients};
     this.setState({recipes: recipes});
@@ -63,9 +63,7 @@ class Recipe extends React.Component {
                   <Button bsStyle="danger">Delete</Button>
                 </ButtonToolbar>
               </Panel.Body>
-              <EditRecipe onShow={this.state.showEdit} onEdit={this.editRecipe} onEditModal={() => {this.showEditModal(this.state.currentlyEditing)}}
-              currentlyEditing={this.state.currentlyEditing}
-              recipe={recipes[this.state.currentlyEditing]} />
+              <EditRecipe onShow={this.state.showEdit} onEdit={this.editRecipe} onEditModal={() => {this.showEditModal(this.state.currentlyEditing)}} currentlyEditing={this.state.currentlyEditing} recipe={recipes[this.state.currentlyEditing]} />
             </Panel>
           ))}
         </PanelGroup>
